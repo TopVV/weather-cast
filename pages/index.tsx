@@ -24,7 +24,9 @@ export default function Home() {
               </Col>
               <Col>
                 <div>Second Weather-Cast Page With Redux-Flow</div>
-                <Button variant="primary">Go to page</Button>
+                <Link href="/second-page">
+                  <Button variant="primary">Go to page</Button>
+                </Link>
               </Col>
             </Row>
           </Container>

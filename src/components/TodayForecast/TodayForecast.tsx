@@ -1,6 +1,19 @@
 import { Card, ListGroup, ListGroupItem } from "react-bootstrap";
+import { ReactElement } from "react";
 
-const TodayForecast = ({ title, sunrise, sunset, fetchType }) => (
+interface TodayForecastProps {
+  fetchType: string;
+  sunrise: string;
+  sunset: string;
+  title: string;
+}
+
+const TodayForecast = ({
+  fetchType,
+  sunrise,
+  sunset,
+  title,
+}: TodayForecastProps): ReactElement => (
   <Card className="text-center">
     <Card.Header>{fetchType}</Card.Header>
     <Card.Body>

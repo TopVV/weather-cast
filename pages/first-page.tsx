@@ -1,10 +1,17 @@
 import Head from "next/head";
-import styles from "../styles/FirstPage.module.css";
 import { mapInitialForecast } from "../src/global/helpers";
 import TodayForecast from "../src/components/TodayForecast/TodayForecast";
 import WeekForecast from "../src/components/WeekForecast/WeekForecast";
 
-export default function FirstPage({ data }) {
+import { GetServerSideProps } from "next";
+import { ForecastDataInterface } from "../src/interfaces";
+import { ReactElement } from "react";
+
+type FirstPageProps = {
+  data: ForecastDataInterface;
+};
+
+const FirstPage = ({ data }: FirstPageProps): ReactElement => {
   const cityInformation = mapInitialForecast(data);
 
   return (
@@ -22,13 +29,15 @@ export default function FirstPage({ data }) {
       <WeekForecast consolidatedWeather={cityInformation.consolidatedWeather} />
     </div>
   );
-}
+};
 
-export async function getServerSideProps() {
+export const getServerSideProps: GetServerSideProps = async () => {
   // Fetch data from external API
   const res = await fetch("https://www.metaweather.com/api/location/44418/");
   const data = await res.json();
 
   // Pass data to the page via props
   return { props: { data } };
-}
+};
+
+export default FirstPage;

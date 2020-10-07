@@ -2,8 +2,9 @@ import Head from "next/head";
 import styles from "../styles/Home.module.css";
 import { Jumbotron, Button, Container, Row, Col } from "react-bootstrap";
 import Link from "next/link";
+import { ReactElement } from "react";
 
-export default function Home() {
+export default function Home(): ReactElement {
   return (
     <div className={styles.container}>
       <Head>

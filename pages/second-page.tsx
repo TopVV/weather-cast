@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useDispatch, useSelector } from "react-redux";
-import { useEffect } from "react";
+import { ReactElement, useEffect } from "react";
 import { mapInitialForecast } from "../src/global/helpers";
 import TodayForecast from "../src/components/TodayForecast/TodayForecast";
 import WeekForecast from "../src/components/WeekForecast/WeekForecast";
@@ -8,8 +8,8 @@ import forecastService from "../src/service";
 import LoadingSpinner from "../src/components/LoadingSpinner/LoadingSpinner";
 import { getCityForecastSuccess } from "../src/actions";
 
-export default function FirstPage() {
-  const currentForecast = useSelector((state) =>
+export default function SecondPage(): ReactElement {
+  const cityInformation = useSelector((state) =>
     state.get("currentCityForecast")
   );
   const isLoading = useSelector((state) => state.get("isLoading"));
@@ -17,14 +17,12 @@ export default function FirstPage() {
 
   const fetchAndStoreForecast = async (dispatch) => {
     const response = await forecastService.getCityForecastById();
-    dispatch(getCityForecastSuccess(response?.data));
+    dispatch(getCityForecastSuccess(mapInitialForecast(response?.data)));
   };
 
   useEffect(() => {
     fetchAndStoreForecast(dispatch);
   }, []);
-
-  const cityInformation = mapInitialForecast(currentForecast);
 
   return (
     <div>

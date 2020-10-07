@@ -1,6 +1,14 @@
 import { Card, ListGroup } from "react-bootstrap";
+import { ReactElement } from "react";
+import { consolidatedWeatherInterface } from "../../interfaces";
 
-const WeekForecast = ({ consolidatedWeather }) => (
+interface WeekForecastProps {
+  consolidatedWeather: consolidatedWeatherInterface[];
+}
+
+const WeekForecast = ({
+  consolidatedWeather,
+}: WeekForecastProps): ReactElement => (
   <div className="week-forecast d-flex ">
     {consolidatedWeather?.map((dayForecast, idx) => {
       if (idx === 0) {
